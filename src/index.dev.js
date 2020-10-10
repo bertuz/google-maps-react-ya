@@ -1,0 +1,44 @@
+// @flow
+import * as React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import ReactDOM from 'react-dom';
+import useGoogleAPI from './index';
+
+const MyComponent = (): React.Node => {
+  const googleApi = useGoogleAPI('AIzaSyALk8I0zH4KDZZU_0xqjjIocxojaRfxemc');
+  const mapRef = React.useRef(null);
+  const [mapInstance, setMapInstance] = React.useState(null);
+
+  React.useEffect(() => {
+    if (googleApi === null) return;
+
+    setMapInstance(
+      new googleApi.maps.Map(mapRef.current, {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+      }),
+    );
+  }, [googleApi]);
+
+  React.useEffect(() => {
+    if (!mapInstance) {
+      return;
+    }
+
+    mapInstance.setCenter({ lat: 45.91782, lng: 10.88685 });
+  }, [mapInstance]);
+
+  if (googleApi == null) return <div>cargando...</div>;
+
+  return (
+    <div>
+      cargado.
+      <div style={{ height: 400, width: 400 }} id="mapa" ref={mapRef} />
+    </div>
+  );
+};
+
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  ReactDOM.render(<MyComponent />, rootElement);
+}

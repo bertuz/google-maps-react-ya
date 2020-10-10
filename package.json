@@ -1,20 +1,29 @@
 {
   "name": "google-react-maps",
   "version": "0.9.0",
-  "description": "A helper library to use google maps on react projects",
-  "main": "index.js",
+  "description": "A lightweight hook-based library to use google maps on react projects",
+  "main": "dist/index.js",
   "scripts": {
+    "dev": "webpack-dev-server --inline --hot --env dev",
+    "build": "flow-remove-types src/index.js -D dist/main.js --sourcemaps",
+    "remove-flow-types": "flow-remove-types src/index.js --out-file dist/index.js",
+    "build-lib": "babel src/index.js -o dist/index.js",
     "test": "jest",
     "lint": "eslint ./src",
     "lintfix": "eslint ./src --fix",
-    "flow": "flow",
-    "build": "webpack"
+    "flow": "flow"
   },
   "keywords": [
     "google",
     "maps",
-    "react"
+    "react",
+    "hook"
   ],
+  "files": [
+    "dist",
+    "src/index.js"
+  ],
+  "types": "src/index.js",
   "author": "Matteo Bertamini",
   "license": "MIT",
   "dependencies": {
@@ -29,8 +38,10 @@
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.5.0",
     "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
     "eslint": "^7.10.0",
     "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.12.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-flowtype": "^5.2.0",
     "eslint-plugin-import": "^2.22.1",
@@ -42,10 +53,16 @@
     "eslint-plugin-react-hooks": "^4.1.2",
     "eslint-plugin-standard": "^4.0.1",
     "flow-bin": "^0.135.0",
+    "flow-remove-types": "^2.135.0",
+    "html-webpack-plugin": "3.2.0",
+    "html-webpack-root-plugin": "^0.10.0",
     "jest": "^26.5.0",
     "prettier": "2.1.2",
     "react-dom": "^16.13.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.2.0"
   }
 }
