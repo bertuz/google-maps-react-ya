@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import useGoogleAPI from './index';
 
 const MyComponent = (): React.Node => {
-  const googleApi = useGoogleAPI('MY-API-HERE');
+  const googleApi = useGoogleAPI('MY-API-KEY-HERE');
   const mapRef = React.useRef(null);
   const [mapInstance, setMapInstance] = React.useState(null);
 

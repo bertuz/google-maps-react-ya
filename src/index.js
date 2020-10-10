@@ -54,6 +54,7 @@ const createScriptTag = (
         document.getElementsByTagName('body')[0];
       scriptParentElement.appendChild(scriptTag);
     } else {
+      console.warn('Google API already loaded.');
       resolve(window.google);
     }
   });
