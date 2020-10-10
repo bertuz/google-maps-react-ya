@@ -1,5 +1,8 @@
 .PHONY: test build
 
+watch:
+	@yarn watch
+
 dev:
 	@yarn dev
 

@@ -4,10 +4,9 @@
   "description": "A lightweight hook-based library to use google maps on react projects",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot --env dev",
-    "build": "flow-remove-types src/index.js -D dist/main.js --sourcemaps",
-    "remove-flow-types": "flow-remove-types src/index.js --out-file dist/index.js",
-    "build-lib": "babel src/index.js -o dist/index.js",
+    "dev": "webpack --inline --color --env dev",
+    "watch": "webpack-dev-server --inline --hot --env dev",
+    "build-lib": "ENV='prod' babel src/index.js -o dist/index.js",
     "test": "jest",
     "lint": "eslint ./src",
     "lintfix": "eslint ./src --fix",
@@ -24,7 +23,7 @@
     "src/index.js"
   ],
   "types": "src/index.js",
-  "author": "Matteo Bertamini",
+  "author": "Matteo Bertamini <matteoappfarmer@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "react": "^16.13.1"
@@ -38,6 +37,7 @@
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.5.0",
     "babel-loader": "^8.1.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "clean-webpack-plugin": "^3.0.0",
     "eslint": "^7.10.0",
     "eslint-config-airbnb": "^18.2.0",

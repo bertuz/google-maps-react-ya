@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import useGoogleAPI from './index';
 
 const MyComponent = (): React.Node => {
-  const googleApi = useGoogleAPI('AIzaSyALk8I0zH4KDZZU_0xqjjIocxojaRfxemc');
+  const googleApi = useGoogleAPI('MY-API-HERE');
   const mapRef = React.useRef(null);
   const [mapInstance, setMapInstance] = React.useState(null);
 
@@ -28,12 +28,12 @@ const MyComponent = (): React.Node => {
     mapInstance.setCenter({ lat: 45.91782, lng: 10.88685 });
   }, [mapInstance]);
 
-  if (googleApi == null) return <div>cargando...</div>;
+  if (googleApi == null) return <div>loading...</div>;
 
   return (
     <div>
-      cargado.
-      <div style={{ height: 400, width: 400 }} id="mapa" ref={mapRef} />
+      loaded.
+      <div style={{ height: 400, width: 400 }} id="map" ref={mapRef} />
     </div>
   );
 };

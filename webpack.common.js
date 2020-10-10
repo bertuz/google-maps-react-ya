@@ -1,9 +1,10 @@
 const path = require('path');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   output: {
-    filename: 'main.js',
+    filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
   },
   module: {
