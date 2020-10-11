@@ -42,3 +42,5 @@ const rootElement = document.getElementById('root');
 if (rootElement) {
   ReactDOM.render(<MyComponent />, rootElement);
 }
+
+export default MyComponent;
