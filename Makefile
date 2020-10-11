@@ -10,4 +10,4 @@ test:
 	@yarn lint && yarn flow
 
 build: test
-	@yarn build-lib
+	@yarn build-lib && yarn copy-flow-sources

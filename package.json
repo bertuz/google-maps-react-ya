@@ -7,6 +7,7 @@
     "dev": "webpack --inline --color --env dev",
     "watch": "webpack-dev-server --inline --hot --env dev",
     "build-lib": "ENV='prod' babel src/index.js -o dist/index.js",
+    "copy-flow-sources": " flow-copy-source -i '**/*.dev.js' -i '**/__tests__/**/*' src dist",
     "test": "jest",
     "lint": "eslint ./src",
     "lintfix": "eslint ./src --fix",
@@ -19,8 +20,7 @@
     "hook"
   ],
   "files": [
-    "dist",
-    "src/index.js"
+    "dist"
   ],
   "types": "src/index.js",
   "author": "Matteo Bertamini <matteoappfarmer@gmail.com>",
@@ -53,6 +53,7 @@
     "eslint-plugin-react-hooks": "^4.1.2",
     "eslint-plugin-standard": "^4.0.1",
     "flow-bin": "^0.135.0",
+    "flow-copy-source": "^2.0.9",
     "flow-remove-types": "^2.135.0",
     "html-webpack-plugin": "3.2.0",
     "html-webpack-root-plugin": "^0.10.0",
