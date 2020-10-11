@@ -67,18 +67,16 @@ module.exports = {
   // maxWorkers: "50%",
 
   // An array of directory names to be searched recursively up from the requiring module's location
-  moduleDirectories: [
-    'node_modules',
-  ],
+  moduleDirectories: ['node_modules'],
 
   // An array of file extensions your modules use
   moduleFileExtensions: [
     'js',
-  //   "json",
-  //   "jsx",
-  //   "ts",
-  //   "tsx",
-  //   "node"
+    //   "json",
+    //   "jsx",
+    //   "ts",
+    //   "tsx",
+    //   "node"
   ],
 
   // eslint-disable-next-line max-len
@@ -129,7 +127,7 @@ module.exports = {
 
   // eslint-disable-next-line max-len
   // The paths to modules that run some code to configure or set up the testing environment before each test
-  // setupFiles: [],
+  setupFiles: ['./setupTests.js'],
 
   // eslint-disable-next-line max-len
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
@@ -152,16 +150,11 @@ module.exports = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  testMatch: [
-    '**/__tests__/**/*.[jt]s?(x)',
-    '**/?(*.)+(spec|test).[tj]s?(x)',
-  ],
+  testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
 
   // eslint-disable-next-line max-len
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-  testPathIgnorePatterns: [
-    '/node_modules/',
-  ],
+  testPathIgnorePatterns: ['/node_modules/'],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
   // testRegex: [],

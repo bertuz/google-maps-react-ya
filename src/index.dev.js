@@ -33,7 +33,12 @@ const MyComponent = (): React.Node => {
   return (
     <div>
       loaded.
-      <div style={{ height: 400, width: 400 }} id="map" ref={mapRef} />
+      <div
+        style={{ height: 400, width: 400 }}
+        id="map"
+        ref={mapRef}
+        data-testid="map"
+      />
     </div>
   );
 };
