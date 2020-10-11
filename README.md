@@ -1,6 +1,6 @@
-# Google React Maps Library 
+# YA Google React Maps Library 
 
-> A lightweight React hook-based Flow-typed library for a simple Google Maps usage 
+> A lightweight React hook-based Flow-typed library for a simple Google Maps API usage 
 
 As [this article explains well](https://cuneyt.aliustaoglu.biz/en/using-google-maps-in-react-without-custom-libraries/), 
 there is no official React library from Google for Google Maps, but there is a JS API Google Maps.
@@ -23,7 +23,7 @@ This library does exactly that job: it loads google Maps API asynchronously, and
 First, install the library:
 
 ```shell
-npm install --save google-react-maps
+npm install --save ya-google-maps-react
 ```
 
 ## Automatically Lazy-loading Google API
@@ -68,8 +68,8 @@ If you have some issues, please make an issue on the issues tab and try to inclu
 ## Contributing
 
 ```shell
-git clone https://github.com/bertuz/google-react-maps.git
-cd google-react-maps
+git clone https://github.com/bertuz/ya-google-maps-react.git
+cd ya-google-maps-react
 npm install
 make watch
 ```

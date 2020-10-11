@@ -1,5 +1,5 @@
 {
-  "name": "google-react-maps",
+  "name": "ya-google-maps-react",
   "version": "0.9.0",
   "description": "A lightweight hook-based library to use google maps on react projects",
   "main": "dist/index.js",
