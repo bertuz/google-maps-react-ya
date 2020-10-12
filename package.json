@@ -3,6 +3,10 @@
   "version": "0.9.0",
   "description": "A lightweight hook-based library to use google maps on react projects",
   "main": "dist/index.js",
+  "files": [
+    "dist/index.js",
+    "dist/index.js.flow"
+  ],
   "scripts": {
     "dev": "webpack --inline --color --env dev",
     "watch": "webpack-dev-server --inline --hot --env dev",
@@ -19,10 +23,6 @@
     "react",
     "hook"
   ],
-  "files": [
-    "dist"
-  ],
-  "types": "src/index.js",
   "author": "Matteo Bertamini <matteoappfarmer@gmail.com>",
   "license": "MIT",
   "dependencies": {
