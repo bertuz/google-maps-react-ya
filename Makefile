@@ -10,4 +10,4 @@ test:
 	@yarn lint && yarn flow
 
 build: test
-	@yarn build-lib && yarn copy-flow-sources
+	@yarn build-lib && yarn copy-flow-sources && yarn copy-typescript-definitions

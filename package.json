@@ -1,6 +1,6 @@
 {
   "name": "ya-google-maps-react",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "A lightweight hook-based library to use google maps on react projects",
   "main": "dist/index.js",
   "files": [
@@ -12,6 +12,7 @@
     "watch": "webpack-dev-server --inline --hot --env dev",
     "build-lib": "ENV='prod' babel src/index.js -o dist/index.js",
     "copy-flow-sources": " flow-copy-source -i '**/*.dev.js' -i '**/__tests__/**/*' src dist",
+    "copy-typescript-definitions": "cp -R src/typings/* dist",
     "test": "jest",
     "lint": "eslint ./src",
     "lintfix": "eslint ./src --fix",
