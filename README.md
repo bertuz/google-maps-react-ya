@@ -1,6 +1,6 @@
-# YA Google React Maps Library 
+# YA Google Maps React Library 
 
-> A lightweight React hook-based Flow-typed library for a simple Google Maps API usage 
+> A lightweight React hook-based library for a simple Google Maps API usage 
 
 As [this article explains well](https://cuneyt.aliustaoglu.biz/en/using-google-maps-in-react-without-custom-libraries/), 
 there is no official React library from Google for Google Maps, but there is a JS API Google Maps.
@@ -14,7 +14,7 @@ helps us by the point of view of code readability, but with some drawbacks:
 - You can't use community help efficiently.
 
 So, the goal of this library is *helping us to load the API via a _hook_* and have the 
-*full control of Google Maps API*. 
+*full control of Google Maps API*, even when we use JSX components for an easier development. 
 
 This library does exactly that job: it loads google Maps API asynchronously, and it returns the google object. Period.
 
@@ -59,8 +59,8 @@ const MyComponent = (): React.Node => {
 ```
 
 ## Future evolution
-- tests
-- Some complementary components, in order to allow a fast development for simple cases.
+- bad case scenarios tests
+- Some complementary components, in order to allow a fast development for simple cases, but with full control on the object.
 
 ## Issues?
 If you have some issues, please make an issue on the issues tab and try to include an example.
