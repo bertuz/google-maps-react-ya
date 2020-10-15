@@ -1,11 +1,12 @@
 {
   "name": "ya-google-maps-react",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "A lightweight hook-based library to use google maps on react projects",
   "main": "dist/index.js",
   "files": [
     "dist/index.js",
-    "dist/index.js.flow"
+    "dist/index.js.flow",
+    "dist/index.d.ts"
   ],
   "scripts": {
     "dev": "webpack --inline --color --env dev",
