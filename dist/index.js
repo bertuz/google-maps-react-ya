@@ -60,8 +60,8 @@ var createScriptTag = function createScriptTag(key, libraries, url, version) {
       scriptTag.addEventListener('load', function () {
         resolve(window.google);
       });
-      scriptTag.addEventListener('error', function () {
-        reject();
+      scriptTag.addEventListener('error', function (errorEvent) {
+        reject(errorEvent);
       });
       var scriptParentElement = (_document$getElements = document.getElementsByTagName('head')[0]) !== null && _document$getElements !== void 0 ? _document$getElements : document.getElementsByTagName('body')[0];
       scriptParentElement.appendChild(scriptTag);
@@ -78,10 +78,17 @@ var useGoogleApi = function useGoogleApi(key, libraries) {
       googleObject = _React$useState2[0],
       setGoogleObject = _React$useState2[1];
 
+  if (googleObject) return googleObject;
   createScriptTag(key, libraries).then(function (loadedGoogleObject) {
-    setGoogleObject(loadedGoogleObject);
-  })["catch"](function () {});
-  return googleObject;
+    setGoogleObject({
+      google: loadedGoogleObject
+    });
+  })["catch"](function (errorEvent) {
+    setGoogleObject({
+      error: errorEvent
+    });
+  });
+  return {};
 };
 
 var _default = useGoogleApi;

@@ -7,7 +7,7 @@ describe('happy cases', () => {
   it('adds the header with the expected URL', async () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useGoogleApi('MY-API-KEY-HERE'));
-    expect(result.current).toBeNull();
+    expect(result.current.google).toBeUndefined();
 
     await waitFor(() =>
       expect(document.getElementsByTagName('head')[0].children[0]).toBeTruthy(),
@@ -24,7 +24,7 @@ describe('happy cases', () => {
   it('returns the loaded object once loaded', async () => {
     expect.hasAssertions();
     const { result } = renderHook(() => useGoogleApi('api'));
-    expect(result.current).toBeNull();
+    expect(result.current.google).toBeUndefined();
 
     await waitFor(() =>
       expect(document.getElementsByTagName('head')[0].children[0]).toBeTruthy(),
@@ -41,6 +41,31 @@ describe('happy cases', () => {
       document.getElementsByTagName('head')[0].children[0].dispatchEvent(event);
     });
 
-    await waitFor(() => expect(result.current).toBe(window.google));
+    await waitFor(() => expect(result.current.google).toBe(window.google));
+    await waitFor(() => expect(result.current.error).toBeUndefined());
+  });
+});
+
+describe('bad cases', () => {
+  it('returns the error object', async () => {
+    expect.hasAssertions();
+
+    const scriptElement = document.createElement('script');
+    jest.spyOn(document, 'createElement').mockReturnValueOnce(scriptElement);
+
+    const { result } = renderHook(() => useGoogleApi('MY-API-KEY-HERE'));
+    expect(result.current.google).toBeUndefined();
+
+    await waitFor(() =>
+      expect(document.getElementsByTagName('head')[0].children[0]).toBeTruthy(),
+    );
+
+    const error = new Event('error');
+    await act(async () => {
+      scriptElement.dispatchEvent(error);
+    });
+
+    await waitFor(() => expect(result.current.google).toBeUndefined());
+    await waitFor(() => expect(result.current.error).toBe(error));
   });
 });

@@ -45,8 +45,8 @@ const createScriptTag = (
       scriptTag.addEventListener('load', () => {
         resolve(window.google);
       });
-      scriptTag.addEventListener('error', () => {
-        reject();
+      scriptTag.addEventListener('error', (errorEvent: Object) => {
+        reject(errorEvent);
       });
 
       const scriptParentElement =
@@ -62,18 +62,29 @@ const createScriptTag = (
 
 // todo check it exists already with a warning!
 
-const useGoogleApi = (key: string, libraries?: Array<string>): Object => {
-  const [googleObject, setGoogleObject] = React.useState(null);
+type GoogleObject = {
+  google?: Object,
+  error?: Object,
+};
+
+const useGoogleApi = (key: string, libraries?: Array<string>): GoogleObject => {
+  const [
+    googleObject: GoogleObject | null,
+    setGoogleObject: (googleObject: GoogleObject) => void,
+  ] = React.useState(null);
+
+  if (googleObject) return googleObject;
 
   createScriptTag(key, libraries)
     .then((loadedGoogleObject: Object) => {
-      setGoogleObject(loadedGoogleObject);
+      setGoogleObject({ google: loadedGoogleObject });
     })
-    .catch(() => {
+    .catch((errorEvent: Object) => {
+      setGoogleObject({ error: errorEvent });
       console.error('something went wrong when loading google API');
     });
 
-  return googleObject;
+  return {};
 };
 
 export default useGoogleApi;

@@ -46,20 +46,23 @@ const MyComponent = (): React.Node => {
   // ...
   
   React.useEffect(() => {
-    if (googleApi === null) return;
+    if (googleApi.google === undefined) return;
 
-    new googleApi.maps.Map(mapRef.current, {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8,
-    });
+    setMapInstance(
+      new googleApi.google.maps.Map(mapRef.current, {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+      }),
+    );
   }, [googleApi]);
 
   // ...
+  if (googleApi.error)
+    return <div>An error occurred while loading the map.</div>;
 }
 ```
 
 ## Future evolution
-- bad case scenarios tests
 - Some complementary components, in order to allow a fast development for simple cases, but with full control on the object.
 
 ## Issues?
@@ -73,7 +76,6 @@ cd ya-google-maps-react
 npm install
 make watch
 ```
-
 ___
 
 ## License

@@ -10,15 +10,15 @@ const MyComponent = (): React.Node => {
   const [mapInstance, setMapInstance] = React.useState(null);
 
   React.useEffect(() => {
-    if (googleApi === null) return;
+    if (googleApi.google === undefined) return;
 
     setMapInstance(
-      new googleApi.maps.Map(mapRef.current, {
+      new googleApi.google.maps.Map(mapRef.current, {
         center: { lat: -34.397, lng: 150.644 },
         zoom: 8,
       }),
     );
-  }, [googleApi]);
+  }, [googleApi.google]);
 
   React.useEffect(() => {
     if (!mapInstance) {
@@ -28,7 +28,10 @@ const MyComponent = (): React.Node => {
     mapInstance.setCenter({ lat: 45.91782, lng: 10.88685 });
   }, [mapInstance]);
 
-  if (googleApi == null) return <div>loading...</div>;
+  if (googleApi.error)
+    return <div>An error occurred while loading the map.</div>;
+
+  if (googleApi.google === undefined) return <div>loading...</div>;
 
   return (
     <div>
