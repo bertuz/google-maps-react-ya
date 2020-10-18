@@ -1,12 +1,15 @@
 .PHONY: test build
 
+install:
+	@yarn
+
 watch:
 	@yarn watch
 
 dev:
 	@yarn dev
 
-test:
+test: install
 	@yarn lint && yarn flow && jest
 
 build: test
