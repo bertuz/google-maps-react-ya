@@ -8,6 +8,7 @@
     "dist/index.js.flow",
     "dist/index.d.ts"
   ],
+  "repository": "github:bertuz/ya-google-maps-react",
   "scripts": {
     "dev": "webpack --inline --color --env dev",
     "watch": "webpack-dev-server --inline --hot --env dev",
