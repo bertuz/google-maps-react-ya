@@ -1,7 +1,7 @@
 .PHONY: test build
 
 install:
-	@yarn
+	@yarn --peer
 
 watch:
 	@yarn watch

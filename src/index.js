@@ -33,8 +33,8 @@ const createScriptTag = (
   libraries?: Array<string>,
   url?: string,
   version?: string,
-): Promise<Object> => {
-  return new Promise<Object>((resolve, reject) => {
+): Promise<Object|null> => {
+  createScriptTag.loadingPromise = new Promise<Object>((resolve, reject) => {
     if (!window.google) {
       const scriptTag = document.createElement('script');
       scriptTag.type = 'text/javascript';
@@ -58,25 +58,45 @@ const createScriptTag = (
       resolve(window.google);
     }
   });
+
+  return createScriptTag.loadingPromise;
 };
 
-// todo check it exists already with a warning!
+createScriptTag.loadingPromise = null;
 
 type GoogleObject = {
   google?: Object,
   error?: Object,
+  toBeLoaded: boolean
 };
+
+let firstHookCall: boolean = true;
 
 const useGoogleApi = (key: string, libraries?: Array<string>): GoogleObject => {
   const [
     googleObject: GoogleObject | null,
     setGoogleObject: (googleObject: GoogleObject) => void,
-  ] = React.useState(null);
+  ] = React.useState({ });
+  const [loaded, setLoaded]  = React.useState(false);
 
-  if (googleObject) return googleObject;
+  if (!firstHookCall) {
+    if(!loaded) {
+      setLoaded(true);
+      createScriptTag?.loadingPromise.then((loadedGoogleObject: Object|null) => {
+        setGoogleObject({ google: loadedGoogleObject });
+      })
+      .catch((errorEvent: Object) => {
+        setGoogleObject({ error: errorEvent });
+      });
+    }
+
+    return googleObject;
+  }
+
+  firstHookCall = false;
 
   createScriptTag(key, libraries)
-    .then((loadedGoogleObject: Object) => {
+    .then((loadedGoogleObject: Object|null) => {
       setGoogleObject({ google: loadedGoogleObject });
     })
     .catch((errorEvent: Object) => {
@@ -84,7 +104,10 @@ const useGoogleApi = (key: string, libraries?: Array<string>): GoogleObject => {
       console.error('something went wrong when loading google API');
     });
 
-  return {};
+  return googleObject;
 };
 
 export default useGoogleApi;
+
+
+
