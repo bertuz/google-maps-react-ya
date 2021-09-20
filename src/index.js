@@ -33,7 +33,7 @@ const createScriptTag = (
   libraries?: Array<string>,
   url?: string,
   version?: string,
-): Promise<Object|null> => {
+): Promise<Object | null> => {
   createScriptTag.loadingPromise = new Promise<Object>((resolve, reject) => {
     if (!window.google) {
       const scriptTag = document.createElement('script');
@@ -68,7 +68,6 @@ createScriptTag.loadingPromise = null;
 type GoogleObject = {
   google?: Object,
   error?: Object,
-  toBeLoaded: boolean
 };
 
 let isFirstHookCall: boolean = true;
@@ -77,18 +76,19 @@ const useGoogleApi = (key: string, libraries?: Array<string>): GoogleObject => {
   const [
     googleObject: GoogleObject | null,
     setGoogleObject: (googleObject: GoogleObject) => void,
-  ] = React.useState({ });
-  const [loaded, setLoaded]  = React.useState(false);
+  ] = React.useState({});
+  const [loaded, setLoaded] = React.useState(false);
 
   if (!isFirstHookCall) {
-    if(!loaded) {
+    if (!loaded) {
       setLoaded(true);
-      createScriptTag?.loadingPromise.then((loadedGoogleObject: Object|null) => {
-        setGoogleObject({ google: loadedGoogleObject });
-      })
-      .catch((errorEvent: Object) => {
-        setGoogleObject({ error: errorEvent });
-      });
+      createScriptTag?.loadingPromise
+        ?.then((loadedGoogleObject: Object | null) => {
+          setGoogleObject({ google: loadedGoogleObject });
+        })
+        ?.catch((errorEvent: Object) => {
+          setGoogleObject({ error: errorEvent });
+        });
     }
 
     return googleObject;
@@ -97,7 +97,7 @@ const useGoogleApi = (key: string, libraries?: Array<string>): GoogleObject => {
   isFirstHookCall = false;
 
   createScriptTag(key, libraries)
-    .then((loadedGoogleObject: Object|null) => {
+    .then((loadedGoogleObject: Object | null) => {
       setGoogleObject({ google: loadedGoogleObject });
     })
     .catch((errorEvent: Object) => {
@@ -109,6 +109,3 @@ const useGoogleApi = (key: string, libraries?: Array<string>): GoogleObject => {
 };
 
 export default useGoogleApi;
-
-
-

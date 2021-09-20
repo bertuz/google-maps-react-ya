@@ -3,16 +3,14 @@ import * as React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import ReactDOM from 'react-dom';
 import useGoogleAPI from './index';
+import { GOOGLE_API_KEY } from './data.dev';
 
 const MyComponent = (): React.Node => {
-  // eslint-disable-next-line no-undef
-  const googleApi = useGoogleAPI(__GOOGLE_API_KEY__);
+  const googleApi = useGoogleAPI(GOOGLE_API_KEY);
   const mapRef = React.useRef(null);
   const [mapInstance, setMapInstance] = React.useState(null);
 
   React.useEffect(() => {
-    console.log('> first component');
-    console.log(googleApi);
     if (googleApi.google === undefined) return;
 
     setMapInstance(
@@ -50,16 +48,11 @@ const MyComponent = (): React.Node => {
 };
 
 const MySecondComponent = (): React.Node => {
-  // eslint-disable-next-line no-undef
-  const googleApi = useGoogleAPI(__GOOGLE_API_KEY__);
-  // console.log('>my component');
-  // console.log(googleApi);
+  const googleApi = useGoogleAPI(GOOGLE_API_KEY);
   const mapRef = React.useRef(null);
   const [mapInstance, setMapInstance] = React.useState(null);
 
   React.useEffect(() => {
-    console.log('> first component');
-    console.log(googleApi);
     if (googleApi.google === undefined) return;
 
     setMapInstance(
@@ -94,8 +87,7 @@ const MySecondComponent = (): React.Node => {
       />
     </div>
   );
-}
-
+};
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
@@ -103,8 +95,8 @@ if (rootElement) {
     <>
       <MyComponent />
       <MySecondComponent />
-    </>
-    , rootElement
+    </>,
+    rootElement,
   );
 }
 
