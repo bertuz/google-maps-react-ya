@@ -52,6 +52,7 @@ const createScriptTag = (
       const scriptParentElement =
         document.getElementsByTagName('head')[0] ??
         document.getElementsByTagName('body')[0];
+
       scriptParentElement.appendChild(scriptTag);
     } else {
       console.warn('Google API already loaded.');
@@ -70,7 +71,7 @@ type GoogleObject = {
   toBeLoaded: boolean
 };
 
-let firstHookCall: boolean = true;
+let isFirstHookCall: boolean = true;
 
 const useGoogleApi = (key: string, libraries?: Array<string>): GoogleObject => {
   const [
@@ -79,7 +80,7 @@ const useGoogleApi = (key: string, libraries?: Array<string>): GoogleObject => {
   ] = React.useState({ });
   const [loaded, setLoaded]  = React.useState(false);
 
-  if (!firstHookCall) {
+  if (!isFirstHookCall) {
     if(!loaded) {
       setLoaded(true);
       createScriptTag?.loadingPromise.then((loadedGoogleObject: Object|null) => {
@@ -93,7 +94,7 @@ const useGoogleApi = (key: string, libraries?: Array<string>): GoogleObject => {
     return googleObject;
   }
 
-  firstHookCall = false;
+  isFirstHookCall = false;
 
   createScriptTag(key, libraries)
     .then((loadedGoogleObject: Object|null) => {

@@ -3,27 +3,29 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import useGoogleApi from '../index';
 
 describe('if the hook is used multiple times', () => {
-  it('only loads once and returns the same shared loaded library object', async () => {
+  it('returns the same shared error object in case it loads badly', async () => {
     expect.hasAssertions();
 
     const headElement = document.createElement('head');
     const givenScriptElement = {
-      addEventListener: () => {},
+      addEventListener: () => {
+      },
     };
+
     const headElementMockAppendChild = jest.spyOn(headElement, 'appendChild').mockReturnValue(givenScriptElement);
+
     const getElementsByTagNameMock = jest.spyOn(document, 'getElementsByTagName').mockReturnValue([headElement]);
 
     const createElementMock = jest.spyOn(document, 'createElement').mockReturnValue(givenScriptElement);
 
-    const expectedGoogleObject = { thisIsMyObject: {} };
-    let givenResolvedCallbackToCall = null;
+    const expectedGoogleObject = { errorkkk: {} };
+    let givenRejectedCallbackToCall = null;
 
     const scriptElementAddEventListenerMock = jest.spyOn(givenScriptElement, 'addEventListener').mockImplementation((param, passedCallback) => {
-      if (param === 'load') {
-        givenResolvedCallbackToCall = async () => {
-          window.google = expectedGoogleObject;
+      if (param === 'error') {
+        givenRejectedCallbackToCall = async () => {
           act(() => {
-            passedCallback();
+            passedCallback(expectedGoogleObject);
           });
         };
       }
@@ -50,14 +52,12 @@ describe('if the hook is used multiple times', () => {
 
     expect(result.current).toStrictEqual({});
     await act(async () => {
-      await givenResolvedCallbackToCall();
+      await givenRejectedCallbackToCall();
 
     });
-    expect(result.current).toHaveProperty('google');
-    expect(result.current.google).toBe(expectedGoogleObject);
-
-    jest.clearAllMocks();
-  });
+    expect(result.current).toHaveProperty('error');
+    expect(result.current.error).toBe(expectedGoogleObject);
+  })
 });
 
 
