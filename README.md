@@ -1,5 +1,5 @@
 # YA Google Maps React Library 
-[![Build Status](https://travis-ci.org/bertuz/ya-google-maps-react.svg?branch=master)](https://travis-ci.org/bertuz/ya-google-maps-react)
+[![Build Status](https://travis-ci.com/bertuz/google-maps-react-ya.svg?branch=master)](https://app.travis-ci.com/github/bertuz/google-maps-react-ya)
 
 > A lightweight React hook-based library for a simple Google Maps API usage 
 
