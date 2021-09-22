@@ -1,6 +1,6 @@
 {
   "name": "ya-google-maps-react",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A lightweight hook-based library to use google maps on react projects",
   "main": "dist/index.js",
   "files": [
@@ -65,8 +65,9 @@
     "html-webpack-root-plugin": "^0.10.0",
     "jest": "^26.5.0",
     "prettier": "2.1.2",
-    "react-dom": "^16.13.1",
-    "react-test-renderer": "^16.13.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-test-renderer": "^17.0.2",
     "regenerator-runtime": "^0.13.7",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.44.2",
