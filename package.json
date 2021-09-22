@@ -1,6 +1,6 @@
 {
   "name": "ya-google-maps-react",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A lightweight hook-based library to use google maps on react projects",
   "main": "dist/index.js",
   "files": [
@@ -28,8 +28,8 @@
   ],
   "author": "Matteo Bertamini <matteoappfarmer@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "react": "^16.13.1"
+  "peerDependencies": {
+    "react": "16.x || 17.x"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",
