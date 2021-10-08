@@ -71,23 +71,43 @@ type GoogleObject = {
 };
 
 let isFirstHookCall: boolean = true;
+const loadedLibraries = [];
 
 const useGoogleApi = (key: string, libraries?: Array<string>): GoogleObject => {
   const [
     googleObject: GoogleObject | null,
     setGoogleObject: (googleObject: GoogleObject) => void,
   ] = React.useState({});
+
   const [loaded, setLoaded] = React.useState(false);
 
   if (!isFirstHookCall) {
+    const missingLibraries = [];
+
+    if (libraries) {
+      for (let i: number = 0; i < libraries?.length ?? 0; i += 1) {
+        if (!loadedLibraries.includes(libraries[i])) {
+          missingLibraries.push(libraries[i]);
+        }
+      }
+    }
+
+    if (missingLibraries.length > 0) {
+      return {
+        // $FlowFixMe[incompatible-type]
+        error: `A new library required after requiring google maps the very first time: ${missingLibraries}. Impossible to be loaded, require it on the very first use of the hook.`,
+      };
+    }
+
     if (!loaded) {
-      setLoaded(true);
       createScriptTag?.loadingPromise
         ?.then((loadedGoogleObject: Object | null) => {
           setGoogleObject({ google: loadedGoogleObject });
+          setLoaded(true);
         })
         ?.catch((errorEvent: Object) => {
           setGoogleObject({ error: errorEvent });
+          setLoaded(true);
         });
     }
 
@@ -95,10 +115,11 @@ const useGoogleApi = (key: string, libraries?: Array<string>): GoogleObject => {
   }
 
   isFirstHookCall = false;
+  loadedLibraries.push(...(libraries ?? []));
 
   createScriptTag(key, libraries)
     .then((loadedGoogleObject: Object | null) => {
-      setGoogleObject({ google: loadedGoogleObject });
+      setGoogleObject({ google: loadedGoogleObject, libraries });
     })
     .catch((errorEvent: Object) => {
       setGoogleObject({ error: errorEvent });
